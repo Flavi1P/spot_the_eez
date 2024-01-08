@@ -18,15 +18,13 @@ server <- function(input, output) {
   })
   
   # Process data when the button is clicked
-  # Process data when the button is clicked
   observeEvent(input$process_button, {
     if (!is.null(data())) {
-      # Apply your custom processing function to latitude and longitude columns
       data_processed <- data() %>%
         rowwise() |> 
         mutate(
-          longitude = convert_dms_to_decimal(longitude),  # Modify 'convert_dms' based on your function
-          latitude = convert_dms_to_decimal(latitude)    # Modify 'convert_dms' based on your function
+          longitude = convert_dms_to_decimal(longitude), 
+          latitude = convert_dms_to_decimal(latitude)    
         )
       
       data_processed_with_zee <- detect_zee(data_processed, "/remote/complex/home/fpetit/spot_the_eez/Data/World_EEZ_v12_20231025")
@@ -47,7 +45,7 @@ server <- function(input, output) {
     if (!is.null(processed_data())) {
       ggplot(processed_data()) +
         geom_sf(data = med_cropped)+
-        geom_point(aes(x = longitude, y = latitude, fill = zee), shape = 21, colour = "black", size = 2)+
+        geom_point(aes(x = longitude, y = latitude, fill = ZEE), shape = 21, colour = "black", size = 2)+
         scale_fill_brewer(palette = "Pastel1")+
         theme_bw()+
         ggtitle("Map of samples")
