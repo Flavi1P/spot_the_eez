@@ -47,3 +47,9 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+#test folder
+test/
+
+#Data (too big)
+Data/
